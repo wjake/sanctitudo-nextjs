@@ -40,11 +40,15 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String? //@unique
   emailVerified DateTime?
   image         String?
+  lodestone     String?
+  role          Role?
   accounts      Account[]
   sessions      Session[]
+  articles      Article[]
+  comments      Comment[]
 }
 
 model VerificationToken {
@@ -53,4 +57,34 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum Role {
+  CONDITOR
+  PRAEFECTUS
+  ARTIFEX
+  SOCIUS
+  NONE
+}
+
+model Article {
+  id         String    @id @default(cuid())
+  title      String    @db.Text
+  body       String    @db.Text
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  comments   Comment[]
+  user       User?     @relation(fields: [userId], references: [id])
+  userId     String?
+}
+
+model Comment {
+  id         String   @id @default(cuid())
+  body       String   @db.Text
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  article    Article? @relation(fields: [articleId], references: [id])
+  articleId  String?
+  user       User?    @relation(fields: [userId], references: [id])
+  userId     String?
 }

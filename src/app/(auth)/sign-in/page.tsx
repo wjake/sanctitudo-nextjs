@@ -1,7 +1,4 @@
 import SignIn from '@/components/SignIn'
-import { buttonVariants } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
-import Link from 'next/link'
 
 export default async function Home() {
   return (

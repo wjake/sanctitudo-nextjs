@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  authModal,
+  modal,
 }: {
   children: React.ReactNode
-  authModal: React.ReactNode
+  modal: React.ReactNode
 }) {
   return (
     <html lang='en' suppressHydrationWarning>
@@ -26,7 +26,7 @@ export default async function RootLayout({
           <ThemeProvider attribute='class' defaultTheme='light' enableSystem>
             <Navbar />
             <div className='container mx-auto h-full max-w-7xl pt-12'>
-              {authModal}
+              {modal}
               {children}
             </div>
             <Toaster />

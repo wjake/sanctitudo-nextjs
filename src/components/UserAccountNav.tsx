@@ -1,6 +1,5 @@
 'use client'
 
-import { User } from 'next-auth'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +14,7 @@ import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 import { LogOut, Settings, User2 } from 'lucide-react'
 import hotkeys from 'hotkeys-js'
+import { User } from 'next-auth'
 
 hotkeys('shift+option+Q', function (event, handler) {
   event.preventDefault()
@@ -22,7 +22,7 @@ hotkeys('shift+option+Q', function (event, handler) {
 })
 
 interface UserAccountNav {
-  user: Pick<User, 'id' | 'name' | 'image'>
+  user: Pick<User, 'id' | 'name' | 'image' | 'role'>
 }
 
 export default function UserAccountNav({ user }: UserAccountNav) {
@@ -39,7 +39,7 @@ export default function UserAccountNav({ user }: UserAccountNav) {
               {user?.name && user.name}
             </p>
             <p className='text-xs leading-none text-muted-foreground'>
-              Lodestone: 32532156
+              {user?.role && user.role}
             </p>
           </div>
         </DropdownMenuLabel>

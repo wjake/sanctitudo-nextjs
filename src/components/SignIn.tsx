@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Icons } from './icons'
 import UserAuthForm from './UserAuthForm'
 import { Separator } from './ui/separator'
 
@@ -11,9 +10,9 @@ export default function SignIn() {
         <h1 className='text-4xl font-bold tracking-tight'>Sanctitudo</h1>
         <h1 className='text-1xl font-semibold tracking-tight'>Welcome back</h1>
         <p className='mx-auto max-w-xs text-sm'>
-          Sanctitudo Sollertia Discord server membership 'Hospite' or higher is
-          required to create an account. By continuing, you agree to our User
-          Agreement and Privacy Policy.
+          Sanctitudo Sollertia membership role Socius or higher is required to
+          create an account. By continuing, you agree to our User Agreement and
+          Privacy Policy.
         </p>
 
         <UserAuthForm />
