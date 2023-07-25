@@ -1,11 +1,11 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { signIn } from 'next-auth/react'
-import { Button } from './ui/button'
-import { Icons } from './icons'
-import { useToast } from './ui/use-toast'
+import { Button } from '../ui/button'
+import { Icons } from '../icons'
+import { useToast } from '../ui/use-toast'
 import { Loader2 } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 

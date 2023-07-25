@@ -1,4 +1,4 @@
-import SignIn from '@/components/SignIn'
+import SignIn from '@/components/auth/sign-in'
 
 export default async function Home() {
   return (

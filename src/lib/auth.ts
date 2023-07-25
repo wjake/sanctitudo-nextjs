@@ -1,5 +1,5 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import DiscordProvider from 'next-auth/providers/discord'
+import DiscordProvider, { DiscordProfile } from 'next-auth/providers/discord'
 import { NextAuthOptions } from 'next-auth'
 import { prisma } from '@/lib/db'
 import { Role } from '@prisma/client'
@@ -14,13 +14,9 @@ export const authOptions: NextAuthOptions = {
       authorization: `https://discord.com/api/oauth2/authorize?scope=${process.env.DISCORD_SCOPES}`,
       userinfo: `https://discord.com/api/users/@me/guilds/${process.env.DISCORD_GUILD}/member`,
       profile(profile) {
-        const nickname: string =
-          profile.nick === 'null' ? profile.nick : profile.user.global_name
-
         const imageFormat = (avatar: string): string => {
           return avatar.startsWith('a_') ? 'gif' : 'png'
         }
-
         const avatarImage = (): string => {
           if (profile.avatar === null) {
             if (profile.user.avatar === null) {
@@ -39,8 +35,11 @@ export const authOptions: NextAuthOptions = {
 
         return {
           id: profile.user.id,
-          name: nickname,
+          discord: profile.user.id,
+          name: profile.user.username,
+          nickname: profile.nick,
           image: avatarImage(),
+          bio: profile.bio,
         }
       },
     }),
@@ -48,7 +47,6 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/sign-in',
     error: '/sign-in',
-    // newUser: '/auth/new-user' // redirect new user to user setttings?
   },
   callbacks: {
     async signIn({ user, profile }) {
@@ -75,15 +73,37 @@ export const authOptions: NextAuthOptions = {
       return true
     },
     async session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id
-        session.user.lodestone = user.lodestone
-        session.user.role = user.role
+      return {
+        ...session,
+        user: {
+          id: user.id,
+          image: user.image,
+          lodestone: user.lodestone,
+          role: user.role,
+          discord: user.discord,
+        },
       }
-      return session
     },
     redirect() {
       return '/'
     },
+  },
+  events: {
+    async signIn({ user, account }) {
+      // if (user.discord) user.discord = account?.providerAccountId!
+      // try {
+      //   const foundUser = await prisma.user.update({
+      //     where: { id: user.id },
+      //     data: {
+      //       role: user.role,
+      //     },
+      //   })
+      //   console.log('User found on signin! ', foundUser)
+      // } catch (e) {
+      //   console.log('User not on records at sign-in! ', e)
+      // }
+    },
+    async signOut({ token, session }) {},
+    async createUser({ user }) {},
   },
 }

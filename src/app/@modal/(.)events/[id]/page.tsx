@@ -1,8 +1,7 @@
 import CloseModal from '@/components/CloseModal'
-import SignIn from '@/components/auth/sign-in'
-import { Card, CardContent } from '@/components/ui/card'
+import Event from '@/components/Event'
 
-export default function Default() {
+export default function Default({ params }: { params: { id: string } }) {
   return (
     <div className='fixed inset-0 z-10 bg-zinc-900/20 backdrop-blur-sm'>
       <div className='mx-auto flex h-full max-w-lg items-center'>
@@ -11,9 +10,7 @@ export default function Default() {
             <CloseModal />
           </div>
 
-          <Card className='py-6'>
-            <SignIn />
-          </Card>
+          <Event id={params.id} />
         </div>
       </div>
     </div>

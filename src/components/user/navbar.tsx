@@ -8,18 +8,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu'
-import UserAvatar from './UserAvatar'
+} from '../ui/dropdown-menu'
+import UserAvatar from './avatar'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 import { LogOut, Settings, User2 } from 'lucide-react'
-import hotkeys from 'hotkeys-js'
 import { User } from 'next-auth'
-
-hotkeys('shift+option+Q', function (event, handler) {
-  event.preventDefault()
-  signOut()
-})
 
 interface UserAccountNav {
   user: Pick<User, 'id' | 'name' | 'image' | 'role'>
@@ -53,8 +47,8 @@ export default function UserAccountNav({ user }: UserAccountNav) {
           </Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem asChild disabled>
-          <Link href='#settings'>
+        <DropdownMenuItem asChild>
+          <Link href='/settings'>
             <Settings className='mr-2 h-4 w-4' />
             Settings
           </Link>

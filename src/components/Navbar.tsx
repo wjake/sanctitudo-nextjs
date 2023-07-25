@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Icons } from './icons'
 import { buttonVariants } from './ui/button'
-import UserAccountNav from './UserAccountNav'
+import UserAccountNav from './user/navbar'
 import { authOptions } from '@/lib/auth'
 import { getServerSession } from 'next-auth'
 import { LogIn } from 'lucide-react'
@@ -11,11 +11,11 @@ export default async function Navbar() {
   const session = await getServerSession(authOptions)
 
   return (
-    <div className='fixed inset-x-0 top-0 z-10 h-fit border-b border-zinc-300 bg-zinc-100 py-2'>
+    <div className='fixed inset-x-0 top-0 z-10 h-fit border-b border-zinc-300 bg-zinc-100 py-2 dark:border-slate-800 dark:bg-slate-950'>
       <div className='container mx-auto flex h-full max-w-7xl items-center justify-between gap-2'>
         <Link href='/' className='flex items-center gap-2'>
           <Icons.logo className='h-10 w-10 sm:h-8 sm:w-8' />
-          <p className='hidden text-sm font-medium text-zinc-700 md:block'>
+          <p className='hidden text-sm font-medium text-zinc-700 dark:text-slate-100 md:block'>
             Sanctitudo
           </p>
         </Link>

@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/avatars/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'img2.finalfantasyxiv.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 }

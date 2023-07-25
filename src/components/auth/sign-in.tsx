@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import UserAuthForm from './UserAuthForm'
-import { Separator } from './ui/separator'
+import UserAuthForm from './form'
+import { Separator } from '../ui/separator'
+import { Suspense } from 'react'
 
 export default function SignIn() {
   return (
@@ -15,7 +16,9 @@ export default function SignIn() {
           Privacy Policy.
         </p>
 
-        <UserAuthForm />
+        <Suspense fallback={<>Fallback</>}>
+          <UserAuthForm />
+        </Suspense>
 
         <div className='mx-auto flex h-5 items-center justify-items-center space-x-4 text-xs'>
           <Link

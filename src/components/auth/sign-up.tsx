@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Icons } from './icons'
-import UserAuthForm from './UserAuthForm'
+import { Icons } from '../icons'
+import UserAuthForm from './form'
 
 export default function SignUp() {
   return (

@@ -2,7 +2,7 @@
 
 import useSWR from 'swr'
 import { toast } from './ui/use-toast'
-import { fetcher } from '@/lib/utils'
+// import { fetcher } from '@/lib/utils'
 
 interface UserProps {
   id: string
@@ -13,6 +13,8 @@ interface UserProps {
     comments: number
   }
 }
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 export default function Users({ users }: { users: UserProps[] }) {
   const { data, error, isLoading } = useSWR('/api/users', fetcher, {
@@ -30,9 +32,5 @@ export default function Users({ users }: { users: UserProps[] }) {
   }
   //   if (isLoading) return <div>loading...</div>
 
-  return (
-    <div>
-      {JSON.stringify(data)} {JSON.stringify(users)}
-    </div>
-  )
+  return <div>{JSON.stringify(users)}</div>
 }
